@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>School Systems – Conversation Activity | Class 8a</title>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --paper: #f5f0e8;
+    --gold: #c8922a;
+    --rust: #b85c38;
+    --sage: #4a7c59;
+    --slate: #5a6a7a;
+    --card-a: #e8f0e8;
+    --card-b: #e8ecf4;
+    --card-c: #f4ece8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  header {
+    border-top: 4px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding: 1.2rem 0 1rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.9rem;
+    line-height: 1.1;
+  }
+
+  header .meta {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--slate);
+  }
+
+  .intro-box {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 2rem;
+    border-radius: 2px;
+  }
+
+  .intro-box h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1rem;
+    font-style: italic;
+    margin-bottom: 0.5rem;
+    color: #c8b89a;
+  }
+
+  .intro-box p {
+    font-size: 0.88rem;
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  /* ROLE CARDS */
+  .role-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin-bottom: 2.5rem;
+  }
+
+  @media (max-width: 600px) {
+    .role-cards { grid-template-columns: 1fr; }
+  }
+
+  .card {
+    border-radius: 3px;
+    padding: 1.3rem 1.4rem 1.4rem;
+    border: 1px solid rgba(0,0,0,0.12);
+    position: relative;
+  }
+
+  .card-a { background: var(--card-a); border-top: 4px solid var(--sage); }
+  .card-b { background: var(--card-b); border-top: 4px solid #3d5a8a; }
+
+  .card-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+
+  .card-a .card-label { color: var(--sage); }
+  .card-b .card-label { color: #3d5a8a; }
+
+  .card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    margin-bottom: 0.9rem;
+    line-height: 1.2;
+  }
+
+  .card p.role-desc {
+    font-size: 0.84rem;
+    line-height: 1.6;
+    color: #2a2a2a;
+    margin-bottom: 1rem;
+    font-style: italic;
+  }
+
+  .card ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .card ul li {
+    font-size: 0.84rem;
+    line-height: 1.55;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .card ul li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--slate);
+    font-size: 0.75rem;
+  }
+
+  .card ul li:last-child { border-bottom: none; }
+
+  /* TASK SECTION */
+  .section {
+    margin-bottom: 2rem;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .section-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+  }
+
+  .section-sub {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--slate);
+    display: block;
+  }
+
+  /* TASK CARDS */
+  .task-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 0.9rem;
+  }
+
+  .task-item {
+    background: white;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 2px;
+    padding: 1rem 1.1rem;
+  }
+
+  .task-item .topic {
+    font-weight: 500;
+    font-size: 0.88rem;
+    margin-bottom: 0.4rem;
+    color: var(--rust);
+  }
+
+  .task-item p {
+    font-size: 0.82rem;
+    line-height: 1.55;
+    color: var(--slate);
+  }
+
+  /* LANGUAGE BOX */
+  .language-box {
+    border: 1px solid rgba(0,0,0,0.12);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .lang-col-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+  }
+
+  @media (max-width: 650px) {
+    .lang-col-wrap { grid-template-columns: 1fr; }
+  }
+
+  .lang-col {
+    padding: 1rem 1.1rem;
+    border-right: 1px solid rgba(0,0,0,0.08);
+  }
+
+  .lang-col:last-child { border-right: none; }
+
+  .lang-col h4 {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+  }
+
+  .lang-col ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .lang-col ul li {
+    font-size: 0.82rem;
+    line-height: 1.7;
+    color: var(--ink);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding: 0.15rem 0;
+  }
+
+  .lang-col ul li:last-child { border-bottom: none; }
+
+  /* OPINION PROMPTS */
+  .prompt-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  .prompt-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    background: white;
+    border: 1px solid rgba(0,0,0,0.08);
+    padding: 0.9rem 1.1rem;
+    border-radius: 2px;
+  }
+
+  .prompt-q {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--rust);
+    min-width: 28px;
+    padding-top: 0.1rem;
+  }
+
+  .prompt-item p {
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+
+  /* FEEDBACK STRIP */
+  .feedback-strip {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 2px;
+    padding: 1.1rem 1.4rem;
+    margin-top: 2rem;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .feedback-col h4 {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .feedback-col ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .feedback-col ul li {
+    font-size: 0.82rem;
+    line-height: 1.7;
+    color: #c8c0b4;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    margin: 2rem 0;
+  }
+
+  .timing-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--gold);
+    color: white;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    margin-bottom: 0.8rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Different Schools,<br><em>Different Rules</em></h1>
+  <span class="meta">Class 8a · Speaking</span>
+
+</header>
+
+<div class="intro-box">
+  <h2>What's this about?</h2>
+  <p>You're going to talk to a partner about schools — comparing what school is like in Germany with schools in Australia. One person has information about the Australian system. The other knows the German system. Ask questions, describe, and share your opinions.</p>
+</div>
+
+<!-- ROLE CARDS -->
+<div class="role-cards">
+
+  <div class="card card-a">
+    <div class="card-label">Role A</div>
+    <h3>You know the German system 🇩🇪</h3>
+    <p class="role-desc">These facts describe the typical German state school system. Your own school may differ — if so, say so. That's interesting too.</p>
+    <ul>
+      <li>School starts around 7:45–8:00 and often finishes by early afternoon</li>
+      <li>Students are streamed at around age 10 — Gymnasium, Realschule, or Hauptschule</li>
+      <li>Grades go from 1 (best) to 6 (worst)</li>
+      <li>A lot of written exams; oral exams too, especially at higher levels</li>
+      <li>School uniform is rare — most students wear their own clothes</li>
+      <li>Some schools have a canteen; others don't — families often pay for school materials</li>
+      <li>Around 6 weeks of summer holidays</li>
+      <li>University entrance depends on the Abitur — the final school exam</li>
+    </ul>
+  </div>
+
+  <div class="card card-b">
+    <div class="card-label">Role B</div>
+    <h3>You know the Australian system 🇦🇺</h3>
+    <p class="role-desc">Your partner doesn't know much about Australian schools. Explain it using the facts below.</p>
+    <ul>
+      <li>School starts around 9:00 and finishes around 3:00–3:30 every day</li>
+      <li>All students follow the same path — no early streaming into different school types</li>
+      <li>Grades use letters (A–E) or percentages, not numbers like 1–5</li>
+      <li>A mix of written exams, projects, and continuous assessment during the year</li>
+      <li>Many schools have uniforms — it's very common, especially in state schools</li>
+      <li>Most schools have a canteen where students can buy lunch</li>
+      <li>Long summer holidays — about 6 weeks in December and January (it's summer there!)</li>
+      <li>University entrance is based on a final score (ATAR) calculated from Year 12 results</li>
+    </ul>
+  </div>
+
+</div>
+
+<hr class="divider">
+
+<!-- TASK 1 -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">1</span>
+    <div>
+      <span class="section-sub">Warm-up · 5 min</span>
+      <div class="section-title">Compare these topics with your partner</div>
+    </div>
+  </div>
+  <div class="task-grid">
+    <div class="task-item">
+      <div class="topic">School hours</div>
+      <p>What time does school start and finish? Is there a big difference?</p>
+    </div>
+    <div class="task-item">
+      <div class="topic">Grades &amp; marks</div>
+      <p>How are students assessed? Which system seems clearer to you?</p>
+    </div>
+    <div class="task-item">
+      <div class="topic">Cost &amp; materials</div>
+      <p>Who pays for textbooks, materials, trips? Is school free in both systems?</p>
+    </div>
+    <div class="task-item">
+      <div class="topic">Holidays</div>
+      <p>How long are the holidays? When are they? Is there anything surprising?</p>
+    </div>
+    <div class="task-item">
+      <div class="topic">Getting into university</div>
+      <p>How does the system decide who goes to university?</p>
+    </div>
+    <div class="task-item">
+      <div class="topic">Student voice</div>
+      <p>Can students choose their subjects? Do they have any say in how their school is run?</p>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- LANGUAGE SUPPORT -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">✦</span>
+    <div>
+      <span class="section-sub">Language support</span>
+      <div class="section-title">Useful phrases</div>
+    </div>
+  </div>
+  <div class="language-box">
+    <div class="lang-col-wrap">
+      <div class="lang-col">
+        <h4>Describing</h4>
+        <ul>
+          <li>In our system, students …</li>
+          <li>Here, school usually …</li>
+          <li>In Australia, it's different — …</li>
+          <li>One thing that's similar is …</li>
+          <li>The main difference is …</li>
+        </ul>
+      </div>
+      <div class="lang-col">
+        <h4>Comparing</h4>
+        <ul>
+          <li>That's quite similar to …</li>
+          <li>That's very different from …</li>
+          <li>In contrast, here we …</li>
+          <li>Both systems have …</li>
+          <li>Unlike here, in Australia …</li>
+        </ul>
+      </div>
+      <div class="lang-col">
+        <h4>Giving opinions</h4>
+        <ul>
+          <li>I think that's … (fairer / harder)</li>
+          <li>Personally, I prefer …</li>
+          <li>That sounds … (strange / better)</li>
+          <li>I'm not sure that's a good idea because …</li>
+          <li>What do you think about …?</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- TASK 2 -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">2</span>
+    <div>
+      <span class="section-sub">Discussion · 10–15 min</span>
+      <div class="section-title">What do you actually think?</div>
+    </div>
+  </div>
+  <div class="prompt-list">
+    <div class="prompt-item">
+      <span class="prompt-q">Q1</span>
+      <p>In Germany, students are separated into different school types at around age 10. In Australia, everyone follows the same path until they finish school. Which system do you think is <strong>fairer</strong> — and who does each system benefit most? <em>(Take your time on this one.)</em></p>
+    </div>
+    <div class="prompt-item">
+      <span class="prompt-q">Q2</span>
+      <p>Should students wear school uniforms? What are the <strong>advantages and disadvantages</strong>? Would you want a uniform at your school?</p>
+    </div>
+    <div class="prompt-item">
+      <span class="prompt-q">Q3</span>
+      <p>In Australia, there's a mix of continuous assessment and final exams. In Germany, the final exam carries a lot of weight. Which approach do you think is <strong>more accurate</strong> — does one test really show what you know?</p>
+    </div>
+    <div class="prompt-item">
+      <span class="prompt-q">Q4</span>
+      <p>Is it fair that getting into university depends almost entirely on <strong>final exams</strong>? What else should count?</p>
+    </div>
+    <div class="prompt-item">
+      <span class="prompt-q">Q5</span>
+      <p><strong>One thing</strong> you would change about your own school system — what is it, and why?</p>
+    </div>
+  </div>
+</div>
+
+<!-- FEEDBACK -->
+<div class="feedback-strip">
+  <div class="feedback-col">
+    <h4>Listen for …</h4>
+    <ul>
+      <li>Comparative structures (more … than, -er than)</li>
+      <li>Opinion phrases (I think, personally …)</li>
+      <li>Contrast connectors (but, however, unlike)</li>
+    </ul>
+  </div>
+  <div class="feedback-col">
+    <h4>Push further if …</h4>
+    <ul>
+      <li>Partner only gives one-word answers → ask "Why do you think that?"</li>
+      <li>You agree on everything → try to find one thing to disagree about</li>
+    </ul>
+  </div>
+  <div class="feedback-col">
+    <h4>Timing</h4>
+    <ul>
+      <li>Role cards + Task 1: ~8 min</li>
+      <li>Language box: 2 min</li>
+      <li>Task 2 discussion: 12–15 min</li>
+      <li>Wrap-up: 5 min</li>
+    </ul>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- WRAP-UP -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">3</span>
+    <div>
+      <span class="section-sub">Wrap-up · 5 min · Whole class</span>
+      <div class="section-title">Report back</div>
+    </div>
+  </div>
+
+  <div class="intro-box" style="margin-bottom: 1.2rem;">
+    <h2>Your task</h2>
+    <p>Each pair chooses <strong>one thing</strong> from your conversation to share with the class. It can be something surprising, something you disagreed about, or something you think is important. You have about 30 seconds each.</p>
+  </div>
+
+  <div class="task-grid" style="margin-bottom: 1.2rem;">
+    <div class="task-item">
+      <div class="topic">Option A — A surprise</div>
+      <p>"We were surprised to find out that …"</p>
+    </div>
+    <div class="task-item">
+      <div class="topic">Option B — A disagreement</div>
+      <p>"We didn't agree about … I think … but my partner thinks …"</p>
+    </div>
+    <div class="task-item">
+      <div class="topic">Option C — A strong opinion</div>
+      <p>"We both think that … because …"</p>
+    </div>
+    <div class="task-item">
+      <div class="topic">Option D — A question</div>
+      <p>"Something we couldn't answer was … Does anyone know?"</p>
+    </div>
+  </div>
+
+  <div class="language-box">
+    <div class="lang-col-wrap">
+      <div class="lang-col">
+        <h4>Starting your report</h4>
+        <ul>
+          <li>We found out that …</li>
+          <li>We were surprised that …</li>
+          <li>We talked about … and we think …</li>
+          <li>One thing we noticed was …</li>
+        </ul>
+      </div>
+      <div class="lang-col">
+        <h4>Reporting a disagreement</h4>
+        <ul>
+          <li>We didn't agree about …</li>
+          <li>I thought … but my partner thought …</li>
+          <li>We had different opinions on …</li>
+          <li>In the end, we couldn't decide …</li>
+        </ul>
+      </div>
+      <div class="lang-col">
+        <h4>Responding to other pairs</h4>
+        <ul>
+          <li>We thought the same thing.</li>
+          <li>We had a different opinion — we think …</li>
+          <li>That's interesting because we …</li>
+          <li>Can you say more about …?</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
