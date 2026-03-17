@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Role Cards – School Systems</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #1a1a2e;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* ── LANDING SCREEN ── */
+  #landing {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem;
+  }
+
+  #landing h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem;
+    color: #f5f0e8;
+    text-align: center;
+    line-height: 1.25;
+  }
+
+  #landing p {
+    font-size: 0.82rem;
+    color: #6a7a9a;
+    letter-spacing: 0.06em;
+    text-align: center;
+  }
+
+  .role-buttons {
+    display: flex;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .role-btn {
+    border: none;
+    border-radius: 6px;
+    padding: 1.4rem 2.2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+    min-width: 160px;
+  }
+
+  .role-btn:active { transform: scale(0.96); }
+
+  .role-btn .flag { font-size: 2rem; }
+
+  .role-btn .btn-label {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+
+  .role-btn .btn-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .btn-a {
+    background: #e8f0e8;
+    color: #1a1a2e;
+    border-top: 4px solid #4a7c59;
+    box-shadow: 0 4px 20px rgba(74,124,89,0.25);
+  }
+
+  .btn-b {
+    background: #e8ecf4;
+    color: #1a1a2e;
+    border-top: 4px solid #3d5a8a;
+    box-shadow: 0 4px 20px rgba(61,90,138,0.25);
+  }
+
+  .btn-a:hover { box-shadow: 0 6px 28px rgba(74,124,89,0.4); transform: translateY(-2px); }
+  .btn-b:hover { box-shadow: 0 6px 28px rgba(61,90,138,0.4); transform: translateY(-2px); }
+
+  /* ── CARD SCREEN ── */
+  #card-screen {
+    display: none;
+    flex: 1;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .card-screen-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.55rem 1rem;
+    flex-shrink: 0;
+  }
+
+  .card-screen-bar span {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #6a7a9a;
+  }
+
+  .back-btn {
+    background: none;
+    border: 1px solid #3a3a5a;
+    color: #6a7a9a;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: color 0.1s, border-color 0.1s;
+  }
+
+  .back-btn:hover { color: #f5f0e8; border-color: #6a7a9a; }
+
+  .card {
+    flex: 1;
+    margin: 0 0.8rem 0.8rem;
+    border-radius: 6px;
+    padding: 1.4rem 1.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    overflow-y: auto;
+    animation: cardIn 0.25s ease;
+  }
+
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .card-a { background: #e8f0e8; border-top: 5px solid #4a7c59; }
+  .card-b { background: #e8ecf4; border-top: 5px solid #3d5a8a; }
+
+  .card-label {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .card-a .card-label { color: #4a7c59; }
+  .card-b .card-label { color: #3d5a8a; }
+
+  .card h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.35rem;
+    line-height: 1.2;
+    color: #1a1a2e;
+  }
+
+  .card .role-desc {
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: #444;
+    font-style: italic;
+    border-left: 3px solid rgba(0,0,0,0.12);
+    padding-left: 0.8rem;
+  }
+
+  .card ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .card ul li {
+    font-size: 0.83rem;
+    line-height: 1.55;
+    padding: 0.45rem 0 0.45rem 1.1rem;
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+    position: relative;
+    color: #1a1a2e;
+  }
+
+  .card ul li:last-child { border-bottom: none; }
+
+  .card ul li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: #888;
+    font-size: 0.72rem;
+    top: 0.52rem;
+  }
+
+  /* Portrait */
+  @media (orientation: portrait) {
+    body { height: auto; overflow-y: auto; }
+    #landing { min-height: 100vh; }
+    #card-screen { min-height: 100vh; overflow: visible; }
+    .card { overflow: visible; }
+  }
+</style>
+</head>
+<body>
+
+<!-- LANDING -->
+<div id="landing">
+  <h1>School Systems<br><em style="font-style:italic; color:#c8922a;">Which role are you?</em></h1>
+  <p>Read your card before you start — no peeking at your partner's.</p>
+  <div class="role-buttons">
+    <button class="role-btn btn-a" onclick="showCard('a')">
+      <span class="flag">🇩🇪</span>
+      <span class="btn-label">Role A</span>
+      <span class="btn-title">German<br>system</span>
+    </button>
+    <button class="role-btn btn-b" onclick="showCard('b')">
+      <span class="flag">🇦🇺</span>
+      <span class="btn-label">Role B</span>
+      <span class="btn-title">Australian<br>system</span>
+    </button>
+  </div>
+</div>
+
+<!-- CARD SCREEN -->
+<div id="card-screen">
+  <div class="card-screen-bar">
+    <span id="card-screen-label">Role A</span>
+    <button class="back-btn" onclick="goBack()">← Back</button>
+  </div>
+  <div id="card-content" class="card"></div>
+</div>
+
+<script>
+  const cards = {
+    a: {
+      cls: 'card-a',
+      label: 'Role A · German system',
+      html: `
+        <div class="card-label">Role A</div>
+        <h2>You know the German system 🇩🇪</h2>
+        <p class="role-desc">These facts describe the typical German state school system. Your own school may differ — if so, say so. That's interesting too.</p>
+        <ul>
+          <li>School starts around 7:45–8:00 and often finishes by early afternoon</li>
+          <li>Students are streamed at around age 10 — Gymnasium, Realschule, or Hauptschule</li>
+          <li>Grades go from 1 (best) to 6 (worst)</li>
+          <li>A lot of written exams; oral exams too, especially at higher levels</li>
+          <li>School uniform is rare — most students wear their own clothes</li>
+          <li>Some schools have a canteen; others don't — families often pay for school materials</li>
+          <li>Around 6 weeks of summer holidays</li>
+          <li>University entrance depends on the Abitur — the final school exam</li>
+        </ul>
+      `
+    },
+    b: {
+      cls: 'card-b',
+      label: 'Role B · Australian system',
+      html: `
+        <div class="card-label">Role B</div>
+        <h2>You know the Australian system 🇦🇺</h2>
+        <p class="role-desc">Your partner doesn't know much about Australian schools. Explain it using the facts below.</p>
+        <ul>
+          <li>School starts around 9:00 and finishes around 3:00–3:30 every day</li>
+          <li>All students follow the same path — no early streaming into different school types</li>
+          <li>Grades use letters (A–E) or percentages, not numbers like 1–6</li>
+          <li>A mix of written exams, projects, and continuous assessment during the year</li>
+          <li>Many schools have uniforms — very common, especially in state schools</li>
+          <li>Most schools have a canteen where students can buy lunch</li>
+          <li>Long summer holidays — about 6 weeks in December and January (it's summer there!)</li>
+          <li>University entrance is based on a final score (ATAR) calculated from Year 12 results</li>
+        </ul>
+      `
+    }
+  };
+
+  function showCard(role) {
+    const data = cards[role];
+    const content = document.getElementById('card-content');
+    content.className = 'card ' + data.cls;
+    content.innerHTML = data.html;
+    document.getElementById('card-screen-label').textContent = data.label;
+    document.getElementById('landing').style.display = 'none';
+    const screen = document.getElementById('card-screen');
+    screen.style.display = 'flex';
+  }
+
+  function goBack() {
+    document.getElementById('card-screen').style.display = 'none';
+    document.getElementById('landing').style.display = 'flex';
+  }
+</script>
+
+</body>
+</html>
